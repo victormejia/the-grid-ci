@@ -5,7 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "run-p start:server start:client",
-    "start:client": "ng serve --proxy-config proxy.conf.json --open",
+    "start:client":
+      "ng serve --proxy-config proxy.conf.json --open --port=4201",
     "start:server": "json-server --watch db.json --routes routes.json",
     "build": "ng build",
     "test": "ng test --single-run --code-coverage",
