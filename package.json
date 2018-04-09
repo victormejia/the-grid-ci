@@ -5,14 +5,15 @@
   "scripts": {
     "ng": "ng",
     "start": "run-p start:server start:client",
-    "start:client":
-      "ng serve --proxy-config proxy.conf.json --open --port=4201",
+    "start:client": "ng serve --proxy-config proxy.conf.json --open --port=4201",
     "start:server": "json-server --watch db.json --routes routes.json",
     "build": "ng build",
     "test": "ng test --single-run --code-coverage",
     "test:watch": "ng test --code-coverage",
     "jasmine": "jasmine jasmine-tutorial/calculator.spec.js",
     "lint": "ng lint",
+    "precise-commits": "precise-commits",
+    "precommit": "run-s lint precise-commits",
     "e2e": "ng e2e"
   },
   "private": true,
