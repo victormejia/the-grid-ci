@@ -9,7 +9,8 @@ import 'rxjs/add/operator/debounceTime';
 })
 export class HackerSearchComponent implements OnInit {
   searchTerm: FormControl = new FormControl();
-  @Output() newSearch = new EventEmitter<string>();
+  @Output() newSearch =
+    new EventEmitter<string>();
 
   constructor() {}
 
