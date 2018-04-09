@@ -13,7 +13,8 @@
     "jasmine": "jasmine jasmine-tutorial/calculator.spec.js",
     "lint": "ng lint",
     "precise-commits": "precise-commits",
-    "precommit": "run-s lint precise-commits",
+    "precommit": "run-s lint precise-commits git:add",
+    "git:add": "git add",
     "e2e": "ng e2e"
   },
   "private": true,
