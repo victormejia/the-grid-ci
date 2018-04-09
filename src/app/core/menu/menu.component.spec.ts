@@ -37,6 +37,6 @@ describe('MenuComponent', () => {
     fixture.detectChanges();
 
     const hackerLink = fixture.debugElement.queryAll(By.css('a'))[0];
-    expect(hackerLink.nativeElement.textContent).toBe('Spies');
+    expect(hackerLink.nativeElement.textContent.trim()).toBe('Spies');
   });
 });
