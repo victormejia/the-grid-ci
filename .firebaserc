@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "the-grid-staging",
+    "production": "the-grid-f436a"
+  }
+}

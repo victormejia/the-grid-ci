@@ -8,6 +8,8 @@
     "start:client": "ng serve --proxy-config proxy.conf.json --open --port=4201",
     "start:server": "json-server --watch db.json --routes routes.json",
     "build": "ng build",
+    "deploy:staging": "firebase use staging && firebase deploy",
+    "deploy:prod": "firebase use production && firebase deploy",
     "test": "ng test --single-run --code-coverage",
     "test:watch": "ng test --code-coverage",
     "jasmine": "jasmine jasmine-tutorial/calculator.spec.js",
