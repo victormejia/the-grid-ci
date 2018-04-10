@@ -23,7 +23,7 @@ export class HackerDetailComponent implements OnInit {
 
   renderDetails(id: string) {
     this.api.getHackerDetails(id).then(data => {
-      this.hacker = data;
+      this.hacker = data[0];
     });
   }
 }

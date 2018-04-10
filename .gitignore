@@ -8,6 +8,7 @@
 
 # dependencies
 /node_modules
+/functions/node_modules
 
 # IDEs and editors
 /.idea
@@ -34,6 +35,8 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+/functions/*.log
+cloud-functions-emulator.log
 
 # e2e
 /e2e/*.js

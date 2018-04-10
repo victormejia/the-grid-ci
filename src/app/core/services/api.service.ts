@@ -18,7 +18,7 @@ export class ApiService {
 
   getHackerDetails(id: string) {
     return this.http
-      .get(`${this.baseUrl}/hackers/${id}`)
+      .get(`${this.baseUrl}/hackers?id=${id}`)
       .toPromise()
       .then((res: Response) => res.json());
   }
