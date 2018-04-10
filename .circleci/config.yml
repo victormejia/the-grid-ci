@@ -4,6 +4,7 @@ setup: &setup
   working_directory: ~/the-grid-ci
   docker:
     - image: circleci/node:8-browsers
+  parallelism: 3
 jobs:
   checkout-and-install:
     <<: *setup
