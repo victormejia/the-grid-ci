@@ -36,7 +36,7 @@ jobs:
           key: the-grid-ci-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Production Build
-          command: npm run build -- --progress=false
+          command: npm run build
   deploy-staging:
     <<: *setup
     steps:
