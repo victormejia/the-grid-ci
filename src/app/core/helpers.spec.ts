@@ -62,7 +62,8 @@ export const mockHackers = [
     specialty: 'generating protocol',
     ip: '198.18.111.138',
     email: 'Kathlyn_Predovic_Cole@yahoo.com',
-    password: 'VV4YWbZTjbt0b9c'
+    password: 'VV4YWbZTjbt0b9c',
+    status: 'safe'
   },
   {
     id: 'dede14f9-dedb-4862-857d-f3c2015dcd56',
