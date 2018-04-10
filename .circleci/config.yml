@@ -60,7 +60,10 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - test
+      - checkout-and-install
+      - test:
+        requires:
+          - checkout-and-install
       - build:
           requires:
             - test
