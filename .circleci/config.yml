@@ -19,7 +19,7 @@ jobs:
       - save_cache:
           key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
-            - "node_modules"
+            - node_modules
   test:
     <<: *setup
     steps:
