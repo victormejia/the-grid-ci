@@ -1,7 +1,7 @@
 version: 2
 
 setup: &setup
-  working_directory: ~/angular-ci-demo
+  working_directory: ~/the-grid
   docker:
     - image: circleci/node:8-browsers
 jobs:
@@ -11,13 +11,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
-            - angular-ci-demo-
+            - the-grid-{{ .Branch }}-{{ checksum "package.json" }}
+            - the-grid-
       - run:
           name: install packages
           command: npm install --silent
       - save_cache:
-          key: angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
+          key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - "node_modules"
   test:
@@ -25,7 +25,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
+          key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Run tests
           command: npm run ci
@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
+          key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Production Build
           command: npm run build
@@ -43,7 +43,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
+          key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Deploy
           command: npm run deploy:staging
@@ -52,7 +52,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
+          key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Deploy
           command: npm run deploy:prod
