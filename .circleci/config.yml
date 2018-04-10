@@ -13,10 +13,9 @@ jobs:
       - restore_cache:
           keys:
             - the-grid-ci-{{ .Branch }}-{{ checksum "package.json" }}
+            - the-grid-ci-{{ .Branch }}
             - the-grid-ci-
-      - run:
-          name: install packages
-          command: npm install --silent
+      - run: npm install --silent
       - save_cache:
           key: the-grid-ci-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
