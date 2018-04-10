@@ -74,10 +74,3 @@ workflows:
             tags:
               ignore:
                 - /.*/
-      - hold:
-          type: approval
-          requires:
-            - build
-      - deploy-prod:
-          requires:
-            - hold
