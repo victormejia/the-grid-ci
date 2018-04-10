@@ -1,0 +1,81 @@
+version: 2
+
+setup: &setup
+  working_directory: ~/angular-ci
+  docker:
+    - image: circleci/node:8-browsers
+jobs:
+  checkout-and-install:
+    <<: *setup
+    steps:
+      - checkout
+      - restore_cache:
+          key: angular-ci-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: install packages
+          command: npm install --silent
+      - save_cache:
+          key: angular-ci-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - "node_modules"
+  test:
+    <<: *setup
+    steps:
+      - checkout
+      - restore_cache:
+          key: angular-ci-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Run tests
+          command: npm run ci
+  build:
+    <<: *setup
+    steps:
+      - checkout
+      - restore_cache:
+          key: angular-ci-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Production Build
+          command: npm run build
+  deploy-staging:
+    <<: *setup
+    steps:
+      - checkout
+      - restore_cache:
+          key: angular-ci-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Deploy
+          command: npm run deploy:staging
+  deploy-prod:
+    <<: *setup
+    steps:
+      - checkout
+      - restore_cache:
+          key: angular-ci-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Deploy
+          command: npm run deploy:prod
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
+      - deploy-staging:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+            tags:
+              ignore:
+                - /.*/
+      - hold:
+          type: approval
+          requires:
+            - build
+      - deploy-prod:
+          requires:
+            - hold
