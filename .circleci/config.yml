@@ -19,7 +19,7 @@ jobs:
       - save_cache:
           key: source-angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
-            - node_modules
+            - "node_modules"
   test:
     <<: *setup
     steps:
