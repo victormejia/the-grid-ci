@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, flush } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HackerDetailComponent } from './hacker-detail.component';
 import { Observable } from 'rxjs/Observable';
@@ -37,33 +37,22 @@ describe('HackerDetailComponent', () => {
     fixture = TestBed.createComponent(HackerDetailComponent);
     component = fixture.componentInstance;
     element = fixture.nativeElement;
+
+    component.hacker = mockHackers[3] as any;
   });
 
-  it(
-    'should set the correct hacker name',
-    async(() => {
-      fixture.detectChanges();
+  it('should set the correct hacker name', () => {
+    fixture.detectChanges();
+    const name = element.querySelector('.header');
+    expect(name.textContent).toBe('Kathlyn');
+  });
 
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        const name = element.querySelector('.header');
-        expect(name.textContent).toBe('Kathlyn');
-      });
-    })
-  );
+  it('should set the correct hacker status message', () => {
+    fixture.detectChanges();
 
-  it(
-    'should set the correct hacker status message',
-    async(() => {
-      fixture.detectChanges();
-
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        const name = element.querySelector('.description');
-        expect(name.textContent.trim()).toBe(
-          "You can't program the bus without bypassing the redundant RSS circuit!"
-        );
-      });
-    })
-  );
+    const name = element.querySelector('.description');
+    expect(name.textContent.trim()).toBe(
+      "You can't program the bus without bypassing the redundant RSS circuit!"
+    );
+  });
 });

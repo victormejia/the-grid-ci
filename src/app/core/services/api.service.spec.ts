@@ -7,6 +7,7 @@ describe('ApiService', () => {
 
   beforeEach(() => {
     service = new ApiService(httpSpy);
+    httpSpy.get.calls.reset();
   });
 
   describe('getHackers', () => {
@@ -40,7 +41,7 @@ describe('ApiService', () => {
       httpSpy.get.and.returnValue(mockResponse);
 
       service.getHackerDetails(id).then(data => {
-        expect(httpSpy.get).toHaveBeenCalledWith(`/api/hackers/${id}`);
+        expect(httpSpy.get).toHaveBeenCalledWith(`/api/hackers?id=${id}`);
         expect(data).toEqual(mockHackers[0]);
         done();
       });
