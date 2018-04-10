@@ -37,33 +37,25 @@ describe('HackerDetailComponent', () => {
     fixture = TestBed.createComponent(HackerDetailComponent);
     component = fixture.componentInstance;
     element = fixture.nativeElement;
+
+    component.hacker = mockHackers[3] as any;
   });
 
-  it(
-    'should set the correct hacker name',
-    async(() => {
-      fixture.detectChanges();
+  it('should set the correct hacker name', () => {
+    fixture.detectChanges();
 
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        const name = element.querySelector('.header');
-        expect(name.textContent).toBe('Kathlyn');
-      });
-    })
-  );
+    fixture.detectChanges();
+    const name = element.querySelector('.header');
+    expect(name.textContent).toBe('Kathlyn');
+  });
 
-  it(
-    'should set the correct hacker status message',
-    async(() => {
-      fixture.detectChanges();
+  it('should set the correct hacker status message', () => {
+    fixture.detectChanges();
 
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        const name = element.querySelector('.description');
-        expect(name.textContent.trim()).toBe(
-          "You can't program the bus without bypassing the redundant RSS circuit!"
-        );
-      });
-    })
-  );
+    fixture.detectChanges();
+    const name = element.querySelector('.description');
+    expect(name.textContent.trim()).toBe(
+      "You can't program the bus without bypassing the redundant RSS circuit!"
+    );
+  });
 });
