@@ -63,7 +63,7 @@ workflows:
       - checkout-and-install
       - test:
           requires:
-          - checkout-and-install
+            - checkout-and-install
       - build:
           requires:
             - test
