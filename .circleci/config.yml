@@ -4,7 +4,6 @@ setup: &setup
   working_directory: ~/the-grid-ci
   docker:
     - image: circleci/node:8-browsers
-  parallelism: 2
 jobs:
   checkout-and-install:
     <<: *setup
@@ -48,7 +47,7 @@ jobs:
           name: Deploy
           command: |
             cd functions
-            npm install
+            npm install --silent
             cd ..
             npm run deploy:staging
   deploy-prod:
@@ -61,7 +60,7 @@ jobs:
           name: Deploy
           command: |
             cd functions
-            npm install
+            npm install --silent
             cd ..
             npm run deploy:prod
 workflows:
