@@ -46,7 +46,7 @@ workflows:
   build-and-deploy:
     jobs:
       - checkout-and-install
-      - test
+      - test:
         requires:
           - checkout-and-install
       - build:
