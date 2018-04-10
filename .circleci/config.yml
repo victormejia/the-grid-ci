@@ -1,7 +1,7 @@
 version: 2
 
 setup: &setup
-  working_directory: ~/the-grid
+  working_directory: ~/angular-ci-demo
   docker:
     - image: circleci/node:8-browsers
 jobs:
@@ -11,13 +11,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - the-grid-{{ .Branch }}-{{ checksum "package.json" }}
-            - the-grid-
+            - source-angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
+            - source-angular-ci-demo-
       - run:
           name: install packages
           command: npm install --silent
       - save_cache:
-          key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
+          key: source-angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - node_modules
   test:
@@ -25,7 +25,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
+          key: source-angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Run tests
           command: npm run ci
@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
+          key: source-angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Production Build
           command: npm run build
@@ -43,7 +43,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
+          key: source-angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Deploy
           command: npm run deploy:staging
@@ -52,7 +52,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: the-grid-{{ .Branch }}-{{ checksum "package.json" }}
+          key: source-angular-ci-demo-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Deploy
           command: npm run deploy:prod
@@ -74,3 +74,10 @@ workflows:
             tags:
               ignore:
                 - /.*/
+      - hold:
+          type: approval
+          requires:
+            - build
+      - deploy-prod:
+          requires:
+            - hold
