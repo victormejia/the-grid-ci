@@ -46,7 +46,11 @@ jobs:
           key: the-grid-ci-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Deploy
-          command: npm run deploy:staging
+          command: |
+            cd functions
+            npm install
+            cd ..
+            npm run deploy:staging
   deploy-prod:
     <<: *setup
     steps:
@@ -55,7 +59,11 @@ jobs:
           key: the-grid-ci-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Deploy
-          command: npm run deploy:prod
+          command: |
+            cd functions
+            npm install
+            cd ..
+            npm run deploy:prod
 workflows:
   version: 2
   build-and-deploy:
