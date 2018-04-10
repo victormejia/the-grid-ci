@@ -67,3 +67,20 @@ workflows:
       - build:
           requires:
             - test
+      - deploy-staging:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+            tags:
+              ignore:
+                - /.*/
+      - hold:
+          type: approval
+          requires:
+            - build
+      - deploy-prod:
+          requires:
+            - hold
