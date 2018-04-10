@@ -10,7 +10,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: angular-ci-{{ .Branch }}-{{ checksum "package.json" }}
+          keys:
+            - angular-ci-{{ .Branch }}-{{ checksum "package.json" }}
+            - angular-ci-
+
       - run:
           name: install packages
           command: npm install --silent
